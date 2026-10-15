@@ -1,0 +1,7 @@
+************* Module museum_catalog
+museum_catalog.py:9:0: C0301: Line too long (176/100) (line-too-long)
+museum_catalog.py:13:0: C0301: Line too long (117/100) (line-too-long)
+
+-----------------------------------
+Your code has been rated at 9.39/10
+
