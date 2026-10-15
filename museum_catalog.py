@@ -6,14 +6,31 @@ import sqlite3
 def create_connection() -> sqlite3.Connection:
     """Create the catalog database and its artifacts table."""
     connection = sqlite3.connect(":memory:")
-    connection.execute("CREATE TABLE artifacts (id INTEGER PRIMARY KEY, title TEXT NOT NULL, era TEXT NOT NULL, value INTEGER NOT NULL, on_display INTEGER NOT NULL DEFAULT 0)")
+    connection.execute(
+        """
+        CREATE TABLE artifacts (
+            id INTEGER PRIMARY KEY,
+            title TEXT NOT NULL,
+            era TEXT NOT NULL,
+            value INTEGER NOT NULL,
+            on_display INTEGER NOT NULL DEFAULT 0
+        )
+        """
+    )
     return connection
 
 
-def add_artifact(connection: sqlite3.Connection, title: str, era: str, value: int, on_display: bool = False) -> None:
+def add_artifact(
+    connection: sqlite3.Connection,
+    title: str,
+    era: str,
+    value: int,
+    on_display: bool = False,
+) -> None:
     """Add an artifact using bound parameters to keep values out of SQL."""
     connection.execute(
-        "INSERT INTO artifacts (title, era, value, on_display) VALUES (?, ?, ?, ?)",
+        "INSERT INTO artifacts (title, era, value, on_display) "
+        "VALUES (?, ?, ?, ?)",
         (title, era, value, int(on_display)),
     )
     connection.commit()
